@@ -12,7 +12,7 @@
             <label for="password">Password</label>
             <input type="password" v-model="password" class="form-control" name="password" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+          <button type="submit" class="btn btn-lg btn-primary btn-block" v-on:submit.prevent="login()">Sign in</button>
         </form>
       </div>
     </div>
@@ -32,18 +32,28 @@ export default {
   },
   methods: {
     login () {
-      axios.post('/api/signin',
+      axios.post('http://localhost:8000/api/signin',
         {
           email: this.email,
           password: this.password
         }
       ).then((res) => {
-        localStorage.setItem('usertoken', res.user.token)
+         /* eslint-disable */
+        /* eslint-disable */
+        console.log(res)
+        localStorage.setItem('usertoken', res.data.token)
+        localStorage.setItem('email',res.data.email)
+        localStorage.setItem('name',res.data.name)
+        localStorage.setItem('picture',res.data.picture)
+        localStorage.setItem('id',res.data.id)
         this.email = ''
         this.password = ''
+        
         router.push({ name: 'Profile' })
       }).catch((err) => {
-        // console.log(err)
+        /* eslint-disable */
+        /* eslint-disable */
+         console.log(err)
       })
       this.emitMethod()
     },

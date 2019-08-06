@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 mt-5 mx-auto">
+       <!-- <div v-if="message" class="alert alert-success">You have sucessfully signed up</div> -->
         <form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">Register</h1>
           
@@ -17,7 +18,7 @@
             <label for="password">Password</label>
             <input type="password" v-model="password" class="form-control" name="password" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Register!</button>
+          <button type="submit" class="btn btn-lg btn-primary btn-block" v-on:submit.prevent="register()" >Register!</button>
         </form>
       </div>
     </div>
@@ -33,12 +34,13 @@ export default {
      
       name: '',
       email: '',
-      password: ''
+      password: '',
+      message:''
     }
   },
   methods: {
     register () {
-      axios.post('/api/signup',
+      axios.post('http://localhost:8000/api/signup',
         {
           
             name: this.name,
@@ -46,8 +48,10 @@ export default {
           password: this.password
         }
       ).then((res) => {
+        // const user=res.data.user
+        // localStorage.setItem('token',user.token)
           /* eslint-disable */
-        console.log(res)/* eslint-disable */ 
+        console.log(res.data.user)/* eslint-disable */ 
         router.push({ name: 'Signin' })
       }).catch((err) => {
         console.log(err)

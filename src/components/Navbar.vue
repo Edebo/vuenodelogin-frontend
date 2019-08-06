@@ -17,7 +17,7 @@
         <router-link class="nav-link" to='/signup'>Signup <span class="sr-only"></span></router-link>
       </li>
       <li class="nav-item" v-if="auth=='loggedin'">
-        <router-link class="nav-link" to='/signup'>Profile<span class="sr-only"></span></router-link>
+        <router-link class="nav-link" to='/profile'>Profile<span class="sr-only"></span></router-link>
       </li>
       <li class="nav-item" v-if="auth=='loggedin'">
         <a class="nav-link" v-on:click='logout'>Logout <span class="sr-only"></span></a>
